@@ -10,7 +10,11 @@ import RegisterPage from "../pages/Register";
 import LoginPage from "../pages/Login";
 import HomePage from "../pages";
 
-const isLogIn = false;
+const storageKey = "loggedInUser";
+const userDataString = localStorage.getItem(storageKey);
+const userData = userDataString ? JSON.parse(userDataString) : null;
+const isLogIn = userData !== null;
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -27,7 +31,7 @@ const router = createBrowserRouter(
         <Route
           path="login"
           element={
-            <ProtectedRoute isAllowed={!isLogIn} redirectPath="/home">
+            <ProtectedRoute isAllowed={!isLogIn} redirectPath="/">
               <LoginPage />
             </ProtectedRoute>
           }
@@ -35,7 +39,7 @@ const router = createBrowserRouter(
         <Route
           path="register"
           element={
-            <ProtectedRoute isAllowed={!isLogIn} redirectPath="/home">
+            <ProtectedRoute isAllowed={!isLogIn} redirectPath="/">
               <RegisterPage />
             </ProtectedRoute>
           }

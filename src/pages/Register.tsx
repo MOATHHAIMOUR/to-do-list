@@ -20,7 +20,7 @@ const RegisterPage = () => {
     },
     {
       name: "email",
-      type: "email",
+      type: "text",
       placeholder: "Enter email",
     },
     {
@@ -58,7 +58,7 @@ const RegisterPage = () => {
           "You will navigate to the login page after 2 seconds to login.",
           {
             position: "bottom-center",
-            duration: 1500,
+            duration: 1800,
             style: {
               backgroundColor: "black",
               color: "white",
@@ -66,16 +66,18 @@ const RegisterPage = () => {
             },
           }
         );
+        setTimeout(() => {
+          location.replace("/login");
+        }, 2000);
       }
     } catch (error) {
-      console.log(error);
       const errorObj = error as AxiosError<IErrorResponse>;
       toast.error(
         errorObj.response?.data?.error?.message ??
           "unknown Error Please Try Again Later! ",
         {
           position: "bottom-center",
-          duration: 1500,
+          duration: 1800,
           style: {
             backgroundColor: "black",
             color: "white",
@@ -92,7 +94,11 @@ const RegisterPage = () => {
   const renderRegisterInputs = registerForm.map((input, index) => {
     return (
       <div key={index}>
-        <Input {...register(input.name, {})} placeholder={input.placeholder} />
+        <Input
+          {...register(input.name, {})}
+          placeholder={input.placeholder}
+          type={input.type}
+        />
         {errors?.[input.name]?.message && (
           <ErrorMsg msg={errors[input.name]?.message ?? ""} />
         )}
