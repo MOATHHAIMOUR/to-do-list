@@ -9,6 +9,7 @@ import ProtectedRoute from "../components/auth/ProtectedRoute";
 import RegisterPage from "../pages/Register";
 import LoginPage from "../pages/Login";
 import HomePage from "../pages";
+import Todos from "../pages/Todos";
 
 const storageKey = "loggedInUser";
 const userDataString = localStorage.getItem(storageKey);
@@ -41,6 +42,14 @@ const router = createBrowserRouter(
           element={
             <ProtectedRoute isAllowed={!isLogIn} redirectPath="/">
               <RegisterPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="todosPaginated"
+          element={
+            <ProtectedRoute isAllowed={isLogIn} redirectPath="/login">
+              <Todos />
             </ProtectedRoute>
           }
         />

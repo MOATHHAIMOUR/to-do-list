@@ -33,3 +33,10 @@ export const loginSchema = yup
     password: yup.string().required("password is required"),
   })
   .required();
+
+export const todoSchema = yup
+  .object({
+    title: yup.string().required("title is required"),
+    description: yup.string().required("description is required"),
+  })
+  .required();
